@@ -28,7 +28,7 @@ const VisiMisi = () => {
                     {[
                         { title: "SKALA SINERGI", desc: "Membangun skala besar kebersamaan dengan niat yang tulus untuk menciptakan sinergi yang kokoh antar lembaga Fakultas Vokasi, mencapai tujuan bersama dalam skala yang lebih luas." },
                         { title: "SKALA AKSI", desc: "Memupuk kesadaran kolektif dengan mendorong partisipasi aktif terhadap isu sosial politik dalam skala besar, termasuk dalam upaya edukasi dan aksi nyata." },
-                        { title: "SKALA ASPIRASI", desc: "Menghimpun dan menindaklanuti aspirasi mahasiswa dengan pendekatan yang komunikatif dan solutif sebagai bentuk perwujudan perwakilan mahasiswa yang responsif." },
+                        { title: "SKALA ASPIRASI", desc: "Menghimpun dan menindaklanuti aspirasi mahasiswa dengan pendekatan yang komunikatif dan solutif sebagai bentuk perwujud perwakilan mahasiswa yang responsif." },
                         { title: "SKALA KARYA", desc: "Mengembangkan potensi mahasiswa Fakultas Vokasi melalui ruang ekspresi dan inovasi yang berdampak pada individu maupun lingkungan sosialnya." }
                     ].map((item, i) => (
                         <div key={i} className="poppins max-w-[300px] md:max-w-[450px] text-xs md:text-xl">
@@ -117,10 +117,10 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
     };
 
     const handleDownload = () => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+        const finalCanvas = canvasRef.current;
+        const ctx = finalCanvas.getContext('2d');
         const photoWidth = 640;
-        const photoHeight = (photoWidth * 9) / 16;
+        const photoHeight = 360;
         const sidePadding = 20;
         const innerPadding = 20;
         const logoHeight = 100;
@@ -128,22 +128,22 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
         const footerPadding = 90;
         const cornerRadius = 25;
 
-        canvas.width = photoWidth + sidePadding * 2;
-        canvas.height = headerPadding + logoHeight + (photoHeight * TOTAL_PHOTOS) + (innerPadding * (TOTAL_PHOTOS + 1)) + footerPadding;
+        finalCanvas.width = photoWidth + sidePadding * 2;
+        finalCanvas.height = headerPadding + logoHeight + (photoHeight * TOTAL_PHOTOS) + (innerPadding * (TOTAL_PHOTOS + 1)) + footerPadding;
         
         const logo = new Image();
         logo.src = logoSrc;
 
         logo.onload = () => {
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            const gradient = ctx.createLinearGradient(0, 0, 0, finalCanvas.height);
             gradient.addColorStop(0, '#D8ECFF');
             gradient.addColorStop(1, '#62A7E9');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
 
             const logoAspectRatio = logo.width / logo.height;
             const drawnLogoWidth = logoHeight * logoAspectRatio;
-            const logoX = (canvas.width - drawnLogoWidth) / 2;
+            const logoX = (finalCanvas.width - drawnLogoWidth) / 2;
             const logoY = headerPadding;
             ctx.drawImage(logo, logoX, logoY, drawnLogoWidth, logoHeight);
 
@@ -152,8 +152,17 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                 const img = new Image();
                 img.src = src;
                 img.onload = () => {
+                    const tempCanvas = document.createElement('canvas');
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCanvas.width = img.width;
+                    tempCanvas.height = img.height;
+                    
+                    tempCtx.translate(img.width, 0);
+                    tempCtx.scale(-1, 1);
+                    tempCtx.drawImage(img, 0, 0);
+
                     const photoY = headerPadding + logoHeight + innerPadding + (photoHeight + innerPadding) * index;
-                    drawRoundedImage(ctx, img, sidePadding, photoY, photoWidth, photoHeight, cornerRadius);
+                    drawRoundedImage(ctx, tempCanvas, sidePadding, photoY, photoWidth, photoHeight, cornerRadius);
                     
                     loadedImages++;
                     
@@ -165,19 +174,15 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                         ctx.fillStyle = 'white';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
-                        const textY = canvas.height - 20;
+                        const textY = finalCanvas.height - 20;
                         ctx.font = `28px "Poppins", Arial, sans-serif`;
-                        ctx.fillText("KABINET SKALA SENANDIKA", canvas.width / 2, textY);
+                        ctx.fillText("KABINET SKALA SENANDIKA", finalCanvas.width / 2, textY);
                         ctx.font = `bold 32px "Poppins", Arial, sans-serif`;
-                        ctx.fillText("BEM VOKASI UB 2025", canvas.width / 2, textY - 35);
-                        ctx.shadowColor = 'transparent';
-                        ctx.shadowBlur = 0;
-                        ctx.shadowOffsetX = 0;
-                        ctx.shadowOffsetY = 0;
+                        ctx.fillText("BEM VOKASI UB 2025", finalCanvas.width / 2, textY - 35);
 
                         const link = document.createElement('a');
                         link.download = 'photostrip-bem-vokasi-2025.png';
-                        link.href = canvas.toDataURL('image/png');
+                        link.href = finalCanvas.toDataURL('image/png');
                         link.click();
                     }
                 };
@@ -201,8 +206,7 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
         <AnimatePresence>
             {isOpen && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 bg-black/70 backdrop-blur-md flex justify-center items-center z-50 p-4">
-                    {/* --- PERUBAHAN DI SINI: Menambahkan max-h-[90vh] dan overflow-y-auto --- */}
-                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 30 }} onClick={(e) => e.stopPropagation()} className="bg-gray-800/80 border border-white/20 rounded-3xl p-4 sm:p-6 w-full max-w-sm relative text-white flex flex-col items-center max-h-[90vh] overflow-y-auto">
+                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 30 }} onClick={(e) => e.stopPropagation()} className="bg-gray-800/80 border border-white/20 rounded-3xl p-4 sm:p-6 w-11/12 sm:w-full max-w-sm relative text-white flex flex-col items-center max-h-[90vh] overflow-y-auto">
                         
                         {isMobile && isPortrait ? (
                             <div className="flex flex-col items-center justify-center text-center h-64">
@@ -213,17 +217,29 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                         ) : (
                             <>
                                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 flex-shrink-0">Photobooth Strip</h2>
-                                {/* --- PERUBAHAN DI SINI: Kontainer preview sekarang potret, sesuai dengan hasil akhir --- */}
                                 <div className={`w-full ${status === 'review' ? 'aspect-[3/4]' : 'aspect-video'} bg-gray-900 rounded-xl p-2 sm:p-4 border-2 border-dashed border-gray-600 flex flex-col items-center justify-center transition-all duration-300`}>
                                     {status === 'review' ? (
                                         <div className="w-full h-full bg-gradient-to-b from-[#D8ECFF] to-[#62A7E9] p-2 rounded-md overflow-y-auto">
                                             {capturedImages.map((src, index) => (
-                                                <img key={index} src={src} alt={`Capture ${index + 1}`} className="w-full mb-2 rounded-sm" />
+                                                <img 
+                                                    key={index} 
+                                                    src={src} 
+                                                    alt={`Capture ${index + 1}`} 
+                                                    // --- INI DIA PERUBAHANNYA ---
+                                                    className="w-full mb-2 rounded-sm transform -scale-x-100" 
+                                                />
                                             ))}
                                         </div>
                                     ) : (
                                         <div className="relative w-full h-full overflow-hidden rounded-md">
-                                            <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" videoConstraints={videoConstraints} className="w-full h-full object-cover" />
+                                            <Webcam
+                                                audio={false}
+                                                ref={webcamRef}
+                                                screenshotFormat="image/jpeg"
+                                                videoConstraints={videoConstraints}
+                                                mirrored={false} 
+                                                className="w-full h-full object-cover"
+                                            />
                                             {status === 'counting' && (
                                                 <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
                                                     <AnimatePresence>
