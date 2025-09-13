@@ -1,0 +1,40 @@
+* {
+  font-family: "poppins", sans-serif;
+}
+
+.boxx {
+  background: linear-gradient(to top, #000000, #275db4, #a5d6ff);
+  border-top-left-radius: 150px;
+  border-top-right-radius: 150px;
+}
+
+.visi {
+  color: white;
+  font-family: "Inter", sans-serif;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.misi {
+  color: white;
+  font-family: "Inter", sans-serif;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .x {
+    animation: App-logo-spin infinite 15s linear;
+  }
+
+  .x:hover {
+    animation: App-logo-spin infinite 0.5s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

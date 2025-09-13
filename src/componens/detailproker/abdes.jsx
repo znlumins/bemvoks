@@ -1,0 +1,44 @@
+import "/src/App.css";
+import ScrollToTop from "../scrolltotop";
+
+export default function Abdes() {
+    return (
+        <>
+        <ScrollToTop/>
+            <div className="min-h-screen bg-[url(/assets/BG2.svg)] bg-cover flex flex-col pt-20 md:pt-25 p-5 md:p-15">
+                <div className="relative bg-[url(/proker/abdes3.jpg)] bg-fixed bg-cover bg-bottom rounded-[8px] md:rounded-[15px] shadow-xl/30">
+                    <div className='w-full h-full flex flex-col items-center py-30'>
+                        <p className='poppins font-bold text-5xl md:text-9xl text-white text-shadow-lg/30 text-shadow-teal-400'>ABDI DESA</p>
+                        <p className='poppins text-xs md:text-3xl text-teal-500 text-shadow-lg/30'>"BEM FAKULTAS VOKASI UNIVERSITAS BRAWIJAYA"</p>
+                    </div>
+                </div>
+                <div className='relative flex gap-5 mt-7 md:mt-10 h-fit w-full'>
+                    <div className='h-fit w-full bg-white/10 backdrop-blur-xs rounded-[8px] md:rounded-[15px] p-8 md:p-15 border-2 border-white'>
+                        <div className='flex flex-col justify-center items-center w-full mb-10'>
+                            <p className='poppins font-bold text-3xl md:text-6xl text-white'>ABDI DESA</p>
+                            <p className='poppins text-[10px] md:text-2xl text-white'>"BEM FAKULTAS VOKASI UNIVERSITAS BRAWIJAYA"</p>
+                        </div>
+                        <p className='poppins text-justify text-sm md:text-xl text-white'>Abdi Desa merupakan program pengabdian masyarakat unggulan dari BEM Vokasi Universitas Brawijaya yang dirancang sebagai sarana aktualisasi nilai-nilai tridharma perguruan tinggi, khususnya dalam aspek pengabdian kepada masyarakat. Program ini bertujuan untuk menghadirkan kontribusi nyata mahasiswa vokasi melalui pendekatan berbasis solusi, pemberdayaan potensi lokal, dan pembangunan kolaboratif bersama masyarakat desa. Dalam pelaksanaannya, Abdi Desa akan berfokus pada penguatan kapasitas masyarakat dalam bidang kewirausahaan, literasi digital, dan pengolahan sumber daya alam menjadi produk bernilai jual tinggi. Kegiatan ini juga menjadi wadah bagi mahasiswa untuk mengembangkan karakter empatik, keterampilan sosial, serta jiwa kepemimpinan melalui interaksi langsung dan hidup berdampingan bersama warga desa. Abdi Desa 2025 tidak hanya menjadi momen belajar kontekstual bagi mahasiswa, tetapi juga mempertegas posisi BEM Vokasi UB sebagai aktor perubahan sosial yang aktif dan berdampak. Melalui kolaborasi dengan institusi, mitra eksternal, dan komunitas lokal, program ini diharapkan mampu memberi kontribusi pada pembangunan desa yang inklusif dan berkelanjutan.</p>
+                        <div className='snap-x scroll-pl-2 md:scroll-pl-6 overflow-x-auto flex space-x-2 md:space-x-4 scroll-smooth hide-scrollbar h-fit w-full md:mt-10 p-10'>
+                            <div className='snap-start shrink-0 min-w-[250px]'>
+                                <img className='h-35 md:h-80 rounded-[8px] md:rounded-[15px] shadow-xl/20 hover:-translate-y-2 duration-300' src="/proker/abdes5.jpg" alt="" />
+                            </div>
+                            <div className='snap-start shrink-0 min-w-[250px]'>
+                                <img className='h-35 md:h-80 rounded-[8px] md:rounded-[15px] shadow-xl/20 hover:-translate-y-2 duration-300' src="/proker/abdes2.jpg" alt="" />
+                            </div>
+                            <div className='snap-start shrink-0 min-w-[250px]'>
+                                <img className='h-35 md:h-80 rounded-[8px] md:rounded-[15px] shadow-xl/20 hover:-translate-y-2 duration-300' src="/proker/abdes3.jpg" alt="" />
+                            </div>
+                            <div className='snap-start shrink-0 min-w-[250px]'>
+                                <img className='h-35 md:h-80 rounded-[8px] md:rounded-[15px] shadow-xl/20 hover:-translate-y-2 duration-300' src="/proker/abdes4.jpg" alt="" />
+                            </div>
+                            <div className='snap-start shrink-0 min-w-[250px]'>
+                                <img className='h-35 md:h-80 rounded-[8px] md:rounded-[15px] shadow-xl/20 hover:-translate-y-2 duration-300' src="/proker/abdes1.jpg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>F
+        </>
+    );
+}

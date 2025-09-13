@@ -1,0 +1,30 @@
+.struktur{
+    font-size: 140px;
+    font-weight: bolder;
+    font-family: 'inter',sans-serif;
+    background: linear-gradient(to top, #62A7E9, #A9D0F6); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tentang{
+    font-family:'inter',sans-serif;
+}
+
+.tentang1{
+    font-family: 'poppins'sans-serif;
+}
+.struktur {
+  font-size: 170px;
+  font-weight: bolder;
+  font-family: "inter", sans-serif;
+  background: linear-gradient(to top, #62a7e9, #a9d0f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 450px){
+    .struktur{
+        font-size: 55px;
+    }
+}
