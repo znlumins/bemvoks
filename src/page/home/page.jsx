@@ -28,7 +28,7 @@ const VisiMisi = () => {
                     {[
                         { title: "SKALA SINERGI", desc: "Membangun skala besar kebersamaan dengan niat yang tulus untuk menciptakan sinergi yang kokoh antar lembaga Fakultas Vokasi, mencapai tujuan bersama dalam skala yang lebih luas." },
                         { title: "SKALA AKSI", desc: "Memupuk kesadaran kolektif dengan mendorong partisipasi aktif terhadap isu sosial politik dalam skala besar, termasuk dalam upaya edukasi dan aksi nyata." },
-                        { title: "SKALA ASPIRASI", desc: "Menghimpun dan menindaklanjuti aspirasi mahasiswa dengan pendekatan yang komunikatif dan solutif sebagai bentuk perwujudan perwakilan mahasiswa yang responsif." },
+                        { title: "SKALA ASPIRASI", desc: "Menghimpun dan menindaklanuti aspirasi mahasiswa dengan pendekatan yang komunikatif dan solutif sebagai bentuk perwujudan perwakilan mahasiswa yang responsif." },
                         { title: "SKALA KARYA", desc: "Mengembangkan potensi mahasiswa Fakultas Vokasi melalui ruang ekspresi dan inovasi yang berdampak pada individu maupun lingkungan sosialnya." }
                     ].map((item, i) => (
                         <div key={i} className="poppins max-w-[300px] md:max-w-[450px] text-xs md:text-xl">
@@ -201,8 +201,8 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
         <AnimatePresence>
             {isOpen && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 bg-black/70 backdrop-blur-md flex justify-center items-center z-50 p-4">
-                    {/* --- PERUBAHAN DI SINI: max-w-md diubah kembali menjadi max-w-sm --- */}
-                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 30 }} onClick={(e) => e.stopPropagation()} className="bg-gray-800/80 border border-white/20 rounded-3xl p-4 sm:p-6 w-full max-w-sm relative text-white flex flex-col items-center">
+                    {/* --- PERUBAHAN DI SINI: Menambahkan max-h-[90vh] dan overflow-y-auto --- */}
+                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 30 }} onClick={(e) => e.stopPropagation()} className="bg-gray-800/80 border border-white/20 rounded-3xl p-4 sm:p-6 w-full max-w-sm relative text-white flex flex-col items-center max-h-[90vh] overflow-y-auto">
                         
                         {isMobile && isPortrait ? (
                             <div className="flex flex-col items-center justify-center text-center h-64">
@@ -212,7 +212,8 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                             </div>
                         ) : (
                             <>
-                                <h2 className="text-2xl sm:text-3xl font-bold mb-4">Photobooth Strip</h2>
+                                <h2 className="text-2xl sm:text-3xl font-bold mb-4 flex-shrink-0">Photobooth Strip</h2>
+                                {/* --- PERUBAHAN DI SINI: Kontainer preview sekarang potret, sesuai dengan hasil akhir --- */}
                                 <div className={`w-full ${status === 'review' ? 'aspect-[3/4]' : 'aspect-video'} bg-gray-900 rounded-xl p-2 sm:p-4 border-2 border-dashed border-gray-600 flex flex-col items-center justify-center transition-all duration-300`}>
                                     {status === 'review' ? (
                                         <div className="w-full h-full bg-gradient-to-b from-[#D8ECFF] to-[#62A7E9] p-2 rounded-md overflow-y-auto">
@@ -240,7 +241,7 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 w-full">
+                                <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 w-full flex-shrink-0">
                                     {status === 'idle' && <button onClick={handleStart} className="w-full text-base sm:text-lg font-semibold py-3 px-8 rounded-lg bg-amber-500 hover:bg-amber-600 transition">Mulai</button>}
                                     {status === 'counting' && <button disabled className="w-full text-base sm:text-lg font-semibold py-3 px-8 rounded-lg bg-gray-500 cursor-not-allowed">Bersiap...</button>}
                                     {status === 'review' && (
@@ -254,7 +255,7 @@ const PhotoboothModal = ({ isOpen, onClose, logoSrc }) => {
                         )}
                         
                         <canvas ref={canvasRef} style={{ display: 'none' }} />
-                        <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-white/50 hover:text-white transition-colors">&times;</button>
+                        <button onClick={onClose} className="absolute top-4 right-4 text-3xl text-white/50 hover:text-white transition-colors flex-shrink-0">&times;</button>
                     </motion.div>
                 </motion.div>
             )}
